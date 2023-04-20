@@ -1,5 +1,5 @@
-import( file.Exists( "packages/glua-extensions/package.lua", gpm.LuaRealm ) and "packages/glua-extensions" or "https://raw.githubusercontent.com/Pika-Software/glua-extensions/main/package.json" )
-import( file.Exists( "packages/net-messager/package.lua", gpm.LuaRealm ) and "packages/net-messager" or "https://raw.githubusercontent.com/Pika-Software/net-messager/main/package.json" )
+import( gpm.sources.lua.CanImport( "packages/glua-extensions" ) and "packages/glua-extensions" or "https://raw.githubusercontent.com/Pika-Software/glua-extensions/main/package.json" )
+import( gpm.sources.lua.CanImport( "packages/net-messager" ) and "packages/net-messager" or "https://raw.githubusercontent.com/Pika-Software/net-messager/main/package.json" )
 
 local packageName = gpm.Package:GetIdentifier()
 local messager = net.Messager( "nw3-vars" )
