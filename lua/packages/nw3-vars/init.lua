@@ -1,0 +1,47 @@
+import( file.Exists( "packages/glua-extensions/package.lua", gpm.LuaRealm ) and "packages/glua-extensions" or "https://raw.githubusercontent.com/Pika-Software/glua-extensions/main/package.json" )
+import( file.Exists( "packages/net-messager/package.lua", gpm.LuaRealm ) and "packages/net-messager" or "https://raw.githubusercontent.com/Pika-Software/net-messager/main/package.json" )
+
+local packageName = gpm.Package:GetIdentifier()
+local messager = net.Messager( "nw3-vars" )
+local ENTITY = FindMetaTable( "Entity" )
+
+function ENTITY:GetNW3VarTable()
+    local sync = messager:CreateSync( self )
+    if not sync then return end
+    return sync:GetTable()
+end
+
+function ENTITY:GetNW3Var( key, default )
+    local sync = messager:CreateSync( self )
+    if not sync then return end
+    return sync:Get( key, default )
+end
+
+function ENTITY:SetNW3Var( key, value )
+    local sync = messager:CreateSync( self )
+    if not sync then return end
+    sync:Set( key, value )
+end
+
+function ENTITY:SetNW3VarProxy( func, name )
+    local sync = messager:CreateSync( self )
+    if not sync then return end
+    sync:SetCallback( name or "Default", func )
+end
+
+if SERVER then
+
+    hook.Add( "PlayerInitialized", packageName, function( ply )
+        messager:Sync( ply )
+    end )
+
+    local function remove( ent )
+        local sync = messager:GetSync( ent )
+        if not sync then return end
+        sync:Destroy()
+    end
+
+    hook.Add( "PlayerDisconnected", packageName, remove )
+    hook.Add( "EntityRemoved", packageName, remove )
+
+end
