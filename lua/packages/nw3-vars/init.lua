@@ -2,29 +2,33 @@ import( gpm.LuaPackageExists( "packages/glua-extensions" ) and "packages/glua-ex
 import( gpm.LuaPackageExists( "packages/net-messager" ) and "packages/net-messager" or "https://raw.githubusercontent.com/Pika-Software/net-messager/main/package.json" )
 
 local packageName = gpm.Package:GetIdentifier()
-local messager = net.Messager( "nw3-vars" )
+local messager = net.Messager( packageName )
 local ENTITY = FindMetaTable( "Entity" )
 
+function ENTITY:InitNW3Var()
+    return messager:CreateSync( self )
+end
+
 function ENTITY:GetNW3VarTable()
-    local sync = messager:CreateSync( self )
+    local sync = self:InitNW3Var()
     if not sync then return end
     return sync:GetTable()
 end
 
 function ENTITY:GetNW3Var( key, default )
-    local sync = messager:CreateSync( self )
+    local sync = self:InitNW3Var()
     if not sync then return end
     return sync:Get( key, default )
 end
 
 function ENTITY:SetNW3Var( key, value )
-    local sync = messager:CreateSync( self )
+    local sync = self:InitNW3Var()
     if not sync then return end
     sync:Set( key, value )
 end
 
 function ENTITY:SetNW3VarProxy( func, name )
-    local sync = messager:CreateSync( self )
+    local sync = self:InitNW3Var()
     if not sync then return end
     sync:SetCallback( name or "Default", func )
 end
