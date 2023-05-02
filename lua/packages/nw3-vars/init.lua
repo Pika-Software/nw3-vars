@@ -1,5 +1,5 @@
-import( gpm.LuaPackageExists( "packages/glua-extensions" ) and "packages/glua-extensions" or "https://raw.githubusercontent.com/Pika-Software/glua-extensions/main/package.json" )
-import( gpm.LuaPackageExists( "packages/net-messager" ) and "packages/net-messager" or "https://raw.githubusercontent.com/Pika-Software/net-messager/main/package.json" )
+import( gpm.LuaPackageExists( "packages/glua-extensions" ) and "packages/glua-extensions" or "https://github.com/Pika-Software/glua-extensions" )
+import( gpm.LuaPackageExists( "packages/net-messager" ) and "packages/net-messager" or "https://github.com/Pika-Software/net-messager" )
 
 local packageName = gpm.Package:GetIdentifier()
 local messager = net.Messager( packageName )
