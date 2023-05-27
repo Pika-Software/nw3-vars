@@ -1,5 +1,5 @@
-require( "packages/glua-extensions", "https://github.com/Pika-Software/glua-extensions" )
-require( "packages/net-messager", "https://github.com/Pika-Software/net-messager" )
+install( "packages/glua-extensions", "https://github.com/Pika-Software/glua-extensions" )
+install( "packages/net-messager", "https://github.com/Pika-Software/net-messager" )
 
 local packageName = gpm.Package:GetIdentifier()
 local messager = net.Messager( packageName )
