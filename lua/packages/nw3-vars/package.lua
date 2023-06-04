@@ -1,3 +1,3 @@
 name = "nw3-vars"
 main = "init.lua"
-version = 000200
+version = 000201

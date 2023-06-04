@@ -13,6 +13,14 @@ function ENTITY:InitNW3Var()
     return messager:CreateSync( self )
 end
 
+if CLIENT then
+
+    hook.Add( "NetworkEntityCreated", packageName, function( entity )
+        hook.Run( "NW3EntityInitialized", entity, entity:InitNW3Var() )
+    end )
+
+end
+
 function ENTITY:GetNW3VarTable()
     local sync = self:InitNW3Var()
     if not sync then return end
@@ -36,10 +44,6 @@ function ENTITY:SetNW3VarProxy( func, name )
     if not sync then return end
     sync:SetCallback( name or "Default", func )
 end
-
-hook.Add( "NetworkEntityCreated", packageName, function( entity )
-    hook.Run( "NW3EntityInitialized", entity, entity:InitNW3Var() )
-end )
 
 if SERVER then
 
