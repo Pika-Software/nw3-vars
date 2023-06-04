@@ -1,8 +1,12 @@
+
 install( "packages/glua-extensions", "https://github.com/Pika-Software/glua-extensions" )
 install( "packages/net-messager", "https://github.com/Pika-Software/net-messager" )
 
+local hook = hook
+
 local packageName = gpm.Package:GetIdentifier()
 local messager = net.Messager( packageName )
+
 local ENTITY = FindMetaTable( "Entity" )
 
 function ENTITY:InitNW3Var()
@@ -32,6 +36,10 @@ function ENTITY:SetNW3VarProxy( func, name )
     if not sync then return end
     sync:SetCallback( name or "Default", func )
 end
+
+hook.Add( "NetworkEntityCreated", packageName, function( entity )
+    hook.Run( "NW3EntityInitialized", entity, entity:InitNW3Var() )
+end )
 
 if SERVER then
 
