@@ -1,7 +1,0 @@
-{
-    "name": "nw3-vars",
-    "files": {
-        "lua/packages/nw3-vars/package.lua": "https://raw.githubusercontent.com/Pika-Software/nw3-vars/master/lua/packages/nw3-vars/package.lua",
-        "lua/packages/nw3-vars/init.lua": "https://raw.githubusercontent.com/Pika-Software/nw3-vars/master/lua/packages/nw3-vars/init.lua"
-    }
-}
