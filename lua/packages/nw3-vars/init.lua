@@ -4,10 +4,9 @@ install( "packages/net-messager", "https://github.com/Pika-Software/net-messager
 
 local hook = hook
 
-local packageName = gpm.Package:GetIdentifier()
 local messager = _G.__NW3
 if type( messager ) ~= "table" then
-    messager = net.Messager( packageName )
+    messager = net.Messager( gpm.Package:GetIdentifier() )
     _G.__NW3 = messager
 end
 
@@ -19,7 +18,7 @@ end
 
 if CLIENT then
 
-    hook.Add( "NetworkEntityCreated", packageName, function( entity )
+    hook.Add( "NetworkEntityCreated", "Synchronization", function( entity )
         hook.Run( "NW3EntityInitialized", entity, entity:InitNW3Var() )
     end )
 
@@ -51,7 +50,7 @@ end
 
 if SERVER then
 
-    hook.Add( "PlayerInitialized", packageName, function( ply )
+    hook.Add( "PlayerInitialized", "Synchronization", function( ply )
         messager:Sync( ply )
     end )
 
@@ -61,7 +60,7 @@ if SERVER then
         sync:Destroy()
     end
 
-    hook.Add( "PlayerDisconnected", packageName, remove )
-    hook.Add( "EntityRemoved", packageName, remove )
+    hook.Add( "PlayerDisconnected", "Destroying", remove )
+    hook.Add( "EntityRemoved", "Destroying", remove )
 
 end
