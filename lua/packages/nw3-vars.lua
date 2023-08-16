@@ -3,10 +3,10 @@ install( "packages/net-messager", "https://github.com/Pika-Software/net-messager
 
 local hook = hook
 
-local messager = _G.__NW3
+local messager = _G._NW3
 if type( messager ) ~= "table" then
     messager = net.Messager( gpm.Package:GetIdentifier() )
-    _G.__NW3 = messager
+    _G._NW3 = messager
 end
 
 local ENTITY = FindMetaTable( "Entity" )
