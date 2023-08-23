@@ -1,5 +1,5 @@
+install( "packages/net-messager.lua", "https://raw.githubusercontent.com/Pika-Software/net-messager/main/lua/packages/net-messager.lua" )
 install( "packages/glua-extensions", "https://github.com/Pika-Software/glua-extensions" )
-install( "packages/net-messager", "https://github.com/Pika-Software/net-messager" )
 
 local hook = hook
 
